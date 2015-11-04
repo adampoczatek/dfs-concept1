@@ -147,6 +147,12 @@ body {
     padding-right: 10px;
 }
 
+.user__avatar {
+    display: block;
+    border-radius: 100px;
+    width: 48px;
+}
+
 .user__details {
     width: calc(100% - 63px);
 }
