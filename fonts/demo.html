@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Transfonter demo</title>
+	<link href="stylesheet.css" rel="stylesheet">
+	<style>
+		/*
+		http://meyerweb.com/eric/tools/css/reset/
+		v2.0 | 20110126
+		License: none (public domain)
+		*/
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed,
+		figure, figcaption, footer, header, hgroup,
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure,
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		/* common styles */
+		body {
+			background: #f1f1f1;
+			color: #000;
+		}
+		.page {
+			background: #fff;
+			width: 940px;
+			margin: 0 auto;
+			padding: 20px 20px 0 20px;
+			overflow: hidden;
+		}
+		.font-container {
+			overflow-x: auto;
+			overflow-y: hidden;
+			margin-bottom: 40px;
+			line-height: 1.3;
+			white-space: nowrap;
+			padding-bottom: 5px;
+		}
+		h1 {
+			position: relative;
+			background: #444;
+			font-size: 32px;
+			color: #fff;
+			padding: 10px 20px;
+			margin: 0 -20px 10px -20px;
+		}
+		.letters {
+			font-size: 25px;
+			margin-bottom: 20px;
+		}
+		.s10:before {
+			content: '10px';
+		}
+		.s11:before {
+			content: '11px';
+		}
+		.s12:before {
+			content: '12px';
+		}
+		.s14:before {
+			content: '14px';
+		}
+		.s18:before {
+			content: '18px';
+		}
+		.s24:before {
+			content: '24px';
+		}
+		.s30:before {
+			content: '30px';
+		}
+		.s36:before {
+			content: '36px';
+		}
+		.s48:before {
+			content: '48px';
+		}
+		.s60:before {
+			content: '60px';
+		}
+		.s72:before {
+			content: '72px';
+		}
+		.s10:before, .s11:before, .s12:before, .s14:before,
+		.s18:before, .s24:before, .s30:before, .s36:before,
+		.s48:before, .s60:before, .s72:before {
+			font-family: Arial, sans-serif;
+			font-size: 10px;
+			font-weight: normal;
+			font-style: normal;
+			color: #999;
+			padding-right: 6px;
+		}
+		/* fonts demo styles */
+		.demo-0 {
+			font-family: 'HelveticaNeueLT Com 67 MdCn';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-1 {
+			font-family: 'HelveticaNeueLT Com 55 Roman';
+			font-weight: bold;
+			font-style: italic;
+		}
+		.demo-2 {
+			font-family: 'HelveticaNeueLT Com 45 Lt';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-3 {
+			font-family: 'HelveticaNeueLT Com 37 ThCn';
+			font-weight: 100;
+			font-style: italic;
+		}
+		.demo-4 {
+			font-family: 'HelveticaNeueLT Com 43 LtEx';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-5 {
+			font-family: 'HelveticaNeueLT Com 95 Blk';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-6 {
+			font-family: 'HelveticaNeueLT Com 25 UltLt';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-7 {
+			font-family: 'HelveticaNeueLT Com 43 LtEx';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-8 {
+			font-family: 'HelveticaNeueLT Com 55 Roman';
+			font-weight: normal;
+			font-style: normal;
+		}
+		.demo-9 {
+			font-family: 'HelveticaNeueLT Com 53 Ex';
+			font-weight: normal;
+			font-style: italic;
+		}
+		.demo-10 {
+			font-family: 'HelveticaNeueLT Com 93 BlkEx';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-11 {
+			font-family: 'HelveticaNeueLT Com 55 Roman';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-12 {
+			font-family: 'HelveticaNeueLT Com 63 MdEx';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-13 {
+			font-family: 'HelveticaNeueLT Com 65 Md';
+			font-weight: 500;
+			font-style: italic;
+		}
+		.demo-14 {
+			font-family: 'HelveticaNeueLT Com 53 Ex';
+			font-weight: bold;
+			font-style: italic;
+		}
+		.demo-15 {
+			font-family: 'HelveticaNeueLT Com 57 Cn';
+			font-weight: normal;
+			font-style: normal;
+		}
+		.demo-16 {
+			font-family: 'HelveticaNeueLT Com 63 MdEx';
+			font-weight: 500;
+			font-style: italic;
+		}
+		.demo-17 {
+			font-family: 'HelveticaNeueLT Com 53 Ex';
+			font-weight: normal;
+			font-style: normal;
+		}
+		.demo-18 {
+			font-family: 'HelveticaNeueLT Com 35 Th';
+			font-weight: 100;
+			font-style: normal;
+		}
+		.demo-19 {
+			font-family: 'HelveticaNeueLT Com 67 MdCn';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-20 {
+			font-family: 'HelveticaNeueLT Com 27 UltLtCn';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-21 {
+			font-family: 'HelveticaNeueLT Com 47 LtCn';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-22 {
+			font-family: 'HelveticaNeueLT Com 97 BlkCn';
+			font-weight: 900;
+			font-style: italic;
+		}
+		.demo-23 {
+			font-family: 'HelveticaNeueLT Com 65 Md';
+			font-weight: 900;
+			font-style: italic;
+		}
+		.demo-24 {
+			font-family: 'HelveticaNeueLT Com 27 UltLtCn';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-25 {
+			font-family: 'HelveticaNeueLT Com 67 MdCn';
+			font-weight: 900;
+			font-style: italic;
+		}
+		.demo-26 {
+			font-family: 'HelveticaNeueLT Com 65 Md';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-27 {
+			font-family: 'HelveticaNeueLT Com 57 Cn';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-28 {
+			font-family: 'HelveticaNeueLT Com 93 BlkEx';
+			font-weight: 900;
+			font-style: italic;
+		}
+		.demo-29 {
+			font-family: 'HelveticaNeueLT Com 33 ThEx';
+			font-weight: 100;
+			font-style: normal;
+		}
+		.demo-30 {
+			font-family: 'HelveticaNeueLT Com 57 Cn';
+			font-weight: normal;
+			font-style: italic;
+		}
+		.demo-31 {
+			font-family: 'HelveticaNeueLT Com 55 Roman';
+			font-weight: normal;
+			font-style: italic;
+		}
+		.demo-32 {
+			font-family: 'HelveticaNeueLT Com 45 Lt';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-33 {
+			font-family: 'HelveticaNeueLT Com 67 MdCn';
+			font-weight: 500;
+			font-style: italic;
+		}
+		.demo-34 {
+			font-family: 'HelveticaNeueLT Com 25 UltLt';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-35 {
+			font-family: 'HelveticaNeueLT Com 47 LtCn';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-36 {
+			font-family: 'HelveticaNeueLT Com 97 BlkCn';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-37 {
+			font-family: 'HelveticaNeueLT Com 63 MdEx';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-38 {
+			font-family: 'HelveticaNeueLT Com 53 Ex';
+			font-weight: bold;
+			font-style: normal;
+		}
+		.demo-39 {
+			font-family: 'HelveticaNeueLT Com 107 XBlkCn';
+			font-weight: 900;
+			font-style: normal;
+		}
+		.demo-40 {
+			font-family: 'HelveticaNeueLT Com 95 Blk';
+			font-weight: 900;
+			font-style: italic;
+		}
+		.demo-41 {
+			font-family: 'HelveticaNeueLT Com 23 UltLtEx';
+			font-weight: 300;
+			font-style: italic;
+		}
+		.demo-42 {
+			font-family: 'HelveticaNeueLT Com 65 Md';
+			font-weight: 500;
+			font-style: normal;
+		}
+		.demo-43 {
+			font-family: 'HelveticaNeueLT Com 57 Cn';
+			font-weight: bold;
+			font-style: italic;
+		}
+		.demo-44 {
+			font-family: 'HelveticaNeueLT Com 63 MdEx';
+			font-weight: 900;
+			font-style: italic;
+		}
+		.demo-45 {
+			font-family: 'HelveticaNeueLT Com 33 ThEx';
+			font-weight: 100;
+			font-style: italic;
+		}
+		.demo-46 {
+			font-family: 'HelveticaNeueLT Com 23 UltLtEx';
+			font-weight: 300;
+			font-style: normal;
+		}
+		.demo-47 {
+			font-family: 'HelveticaNeueLT Com 37 ThCn';
+			font-weight: 100;
+			font-style: normal;
+		}
+		.demo-48 {
+			font-family: 'HelveticaNeueLT Com 35 Th';
+			font-weight: 100;
+			font-style: italic;
+		}
+		.demo-49 {
+			font-family: 'HelveticaNeueLT Com 75 BdOu';
+			font-weight: bold;
+			font-style: normal;
+		}
+	</style>
+</head>
+<body>
+<div class="page">
+	<div class="demo-0">
+		<h1>Helvetica Neue LT Com 67 Medium Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-1">
+		<h1>Helvetica Neue LT Com 76 Bold Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-2">
+		<h1>Helvetica Neue LT Com 46 Light Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-3">
+		<h1>Helvetica Neue LT Com 37 Thin Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-4">
+		<h1>Helvetica Neue LT Com 43 Light Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-5">
+		<h1>Helvetica Neue LT Com 95 Black</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-6">
+		<h1>Helvetica Neue LT Com 25 Ultra Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-7">
+		<h1>Helvetica Neue LT Com 43 Light Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-8">
+		<h1>Helvetica Neue LT Com 55 Roman</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-9">
+		<h1>Helvetica Neue LT Com 53 Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-10">
+		<h1>Helvetica Neue LT Com 93 Black Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-11">
+		<h1>Helvetica Neue LT Com 75 Bold</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-12">
+		<h1>Helvetica Neue LT Com 83 Heavy Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-13">
+		<h1>Helvetica Neue LT Com 66 Medium Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-14">
+		<h1>Helvetica Neue LT Com 73 Bold Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-15">
+		<h1>Helvetica Neue LT Com 57 Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-16">
+		<h1>Helvetica Neue LT Com 63 Medium Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-17">
+		<h1>Helvetica Neue LT Com 53 Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-18">
+		<h1>Helvetica Neue LT Com 35 Thin</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-19">
+		<h1>Helvetica Neue LT Com 87 Heavy Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-20">
+		<h1>Helvetica Neue LT Com 27 Ultra Light Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-21">
+		<h1>Helvetica Neue LT Com 47 Light Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-22">
+		<h1>Helvetica Neue LT Com 97 Black Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-23">
+		<h1>Helvetica Neue LT Com 86 Heavy Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-24">
+		<h1>Helvetica Neue LT Com 27 Ultra Light Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-25">
+		<h1>Helvetica Neue LT Com 87 Heavy Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-26">
+		<h1>Helvetica Neue LT Com 85 Heavy</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-27">
+		<h1>Helvetica Neue LT Com 77 Bold Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-28">
+		<h1>Helvetica Neue LT Com 93 Black Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-29">
+		<h1>Helvetica Neue LT Com 33 Thin Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-30">
+		<h1>Helvetica Neue LT Com 57 Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-31">
+		<h1>Helvetica Neue LT Com 56 Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-32">
+		<h1>Helvetica Neue LT Com 45 Light</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-33">
+		<h1>Helvetica Neue LT Com 67 Medium Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-34">
+		<h1>Helvetica Neue LT Com 26 Ultra Light Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-35">
+		<h1>Helvetica Neue LT Com 47 Light Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-36">
+		<h1>Helvetica Neue LT Com 97 Black Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-37">
+		<h1>Helvetica Neue LT Com 63 Medium Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-38">
+		<h1>Helvetica Neue LT Com 73 Bold Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-39">
+		<h1>Helvetica Neue LT Com 107 Extra Black Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-40">
+		<h1>Helvetica Neue LT Com 96 Black Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-41">
+		<h1>Helvetica Neue LT Com 23 Ultra Light Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-42">
+		<h1>Helvetica Neue LT Com 65 Medium</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-43">
+		<h1>Helvetica Neue LT Com 77 Bold Condensed Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-44">
+		<h1>Helvetica Neue LT Com 83 Heavy Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-45">
+		<h1>Helvetica Neue LT Com 33 Thin Extended Oblique</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-46">
+		<h1>Helvetica Neue LT Com 23 Ultra Light Extended</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-47">
+		<h1>Helvetica Neue LT Com 37 Thin Condensed</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-48">
+		<h1>Helvetica Neue LT Com 36 Thin Italic</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+	<div class="demo-49">
+		<h1>Helvetica Neue LT Com 75 Bold Outline</h1>
+		<div class="font-container">
+			<p class="letters">
+				abcdefghijklmnopqrstuvwxyz <br />
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ <br />				0123456789.:,;()*!?'@#<>$%&^+-=~
+			</p>
+			<p class="s10" style="font-size: 10px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s11" style="font-size: 11px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s12" style="font-size: 12px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s14" style="font-size: 14px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s18" style="font-size: 18px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s24" style="font-size: 24px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s30" style="font-size: 30px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s36" style="font-size: 36px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s48" style="font-size: 48px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s60" style="font-size: 60px;">The quick brown fox jumps over the lazy dog.</p>
+			<p class="s72" style="font-size: 72px;">The quick brown fox jumps over the lazy dog.</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

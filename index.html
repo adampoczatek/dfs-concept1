@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Concept 1</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+    <div id="concept-one"></div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="./dev/base.js"></script>
+    <script src="./dev/photorankService.js"></script>
+    <script src="./dev/app.js"></script>
+    <script id="concept-one-page-template" type="text/x-handlebars-template">
+    <div class="page">
+
+        {{#each this}}
+        <div class="media">
+            <div class="media__wrapper">
+                <div class="media__content">
+                    <img class="media__image" src="{{media.images.normal}}" />
+                </div>
+
+                <div class="media__footer user">
+                    <div class="user__image">
+                        <img class="user__avatar" src="{{uploader.avatar_url}}" />
+                    </div>
+
+                    <div class="user__details">
+                        <span class="user__name">{{uploader.name}} <!-- ({{uploader.username}}) --></span>
+                        <span class="user__activity">{{formatDate media.date_submitted}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    </script>
+    <script id="concept-one-gallery-template" type="text/x-handlebars-template">
+    <div class="gallery"></div>
+    </script>
+    <script id="concept-one-intro-template" type="text/x-handlebars-template">
+    <div class="intro">
+        <div class="intro__message heart">
+            <h1 class="intro__text">{{title}}</h1>
+        </div>
+    </div>
+    </script>
+    <script id="concept-one-outro-template" type="text/x-handlebars-template">
+    <div class="outro">
+        <div class="outro__message">
+            <h1 class="outro__title">{{title}}</h1>
+            <p class="outro__text">{{content}}</p>
+        </div>
+    </div>
+    </script>
+    <script>
+        (function (base, $) {
+            "use strict";
+
+            $(function () {
+                base.Apps.ConceptOne({
+                    target: $("#concept-one"), 
+                    authToken: "f7f217fadcb8dad0bab9395c689114b74d48dbb84aa6fba32c1aa71c0a95f5e1",
+                    itemsPerPage: 8,
+                    pagePersistence: 4000,
+                    introLength: 2000,
+                    outroLength: 3000,
+                    sequenceInterval: 75,
+                    numberOfPages: 2,
+                    intro: {
+                        title: "#dfs"
+                    },
+                    outro: {
+                        title: "Share your style",
+                        content: "dfs.co.uk/gallery"
+                    }
+                });
+            });
+        })(dfs, jQuery);
+    </script>
+</body>
+</html>
