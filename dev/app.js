@@ -68,6 +68,8 @@
                     templates = config.templates,
                     $intro, $outro, $gallery;
 
+                elements.$target.html("");
+
                 $gallery = $(templates.gallery());
                 $intro = $(templates.intro(config.intro));
                 $outro = $(templates.outro(config.outro));
@@ -270,5 +272,67 @@
 
         return ConceptOne;
     })();
+
+    $(function () {
+        var isSettingsMode = /#settings/.test(window.location.href),
+            elements;
+
+        elements = {
+            settings: $("#settings"),
+            toggler: $("#settings-toggler"),
+            submit: $("#apply-settings"),
+            introDisplayTimeout: $("#intro-display-timeout"),
+            introTitle: $("#intro-title"),
+            imagesPerPage: $("#images-per-page"),
+            numberOfPages: $("#number-of-pages"),
+            imagesTimeout: $("#images-display-timeout"),
+            imagesDelay: $("#images-delay"),
+            outroTimeout: $("#outro-display-timeout"),
+            outroTitle: $("#outro-title"),
+            outroText: $("#outro-text")
+        };
+
+        if (isSettingsMode) {
+            initEvents();
+        }
+
+
+        function initEvents() {
+            elements.settings.show();
+
+            elements.toggler.on("click", function (e) {
+                e.preventDefault();
+
+                elements.settings.toggleClass("settings--opened");
+            });
+
+            elements.submit.on("click", function () {
+                updateAnimation();
+
+                elements.toggler.trigger("click");
+            });
+        }
+
+        function updateAnimation() {
+
+            Apps.ConceptOne({
+                target: $("#concept-one"), 
+                authToken: "f7f217fadcb8dad0bab9395c689114b74d48dbb84aa6fba32c1aa71c0a95f5e1",
+                itemsPerPage: parseInt(elements.imagesPerPage.val(), 10),
+                pagePersistence: parseInt(elements.imagesTimeout.val(), 10),
+                introLength: parseInt(elements.introDisplayTimeout.val(), 10),
+                outroLength: parseInt(elements.outroTimeout.val(), 10),
+                sequenceInterval: parseInt(elements.imagesDelay.val(), 10),
+                numberOfPages: parseInt(elements.numberOfPages.val(), 10),
+                intro: {
+                    title: elements.introTitle.val()
+                },
+                outro: {
+                    title: elements.outroTitle.val(),
+                    content: elements.outroText.val()
+                }
+            });
+        }
+    })
 
 })(dfs.Apps, dfs.Services.PhotorankService, jQuery, Handlebars, moment);

@@ -7,6 +7,62 @@
   <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+    <div id="settings" class="settings" style="display: none;">
+        <h3>Intro</h3>
+        <div class="settings__row">
+            <label for="intro-display-timeout">Display for</label>
+            <input id="intro-display-timeout" type="number" min="0" max="20000" step="100" value="2000" /> milliseconds
+        </div>
+
+        <div class="settings__row">
+            <label for="intro-title">Intro text</label>
+            <input id="intro-title" value="#dfs" />
+        </div>
+
+        <h3>Images</h3>
+        <div class="settings__row">
+            <label for="images-per-page">Images per page</label>
+            <input id="images-per-page" type="number" min="1" max="8" value="8" />
+        </div>
+
+        <div class="settings__row">
+            <label for="number-of-pages">Number of pages</label>
+            <input id="number-of-pages" type="number" min="1" max="10" step="1" value="2" />
+        </div>
+
+        <div class="settings__row">
+            <label for="images-display-timeout">Display for</label>
+            <input id="images-display-timeout" type="number" min="0" max="20000" step="100" value="2000" /> milliseconds
+        </div>
+
+        <div class="settings__row">
+            <label for="images-delay">Delay each image by</label>
+            <input id="images-delay" type="number" min="0" max="1000" step="5" value="75" /> milliseconds
+        </div>
+
+        <h3>Outro</h3>
+        <div class="settings__row">
+            <label for="outro-display-timeout">Display for</label>
+            <input id="outro-display-timeout" type="number" min="0" max="20000" step="100" value="2000" /> milliseconds
+        </div>
+
+        <div class="settings__row">
+            <label for="outro-title">Outro title</label>
+            <input id="outro-title" value="Share your style" />
+        </div>
+
+        <div class="settings__row">
+            <label for="outro-text">Outro text</label>
+            <input id="outro-text" value="dfs.co.uk/gallery" />
+        </div> 
+
+        <div class="settings__row">
+            <button id="apply-settings">Apply</button>
+        </div>
+
+        <div id="settings-toggler" class="setting__toggler">Edit</div>
+    </div>
+
     <div id="concept-one"></div>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
