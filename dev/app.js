@@ -14,7 +14,7 @@
             this.config = {
                 authToken: config.authToken,
                 dataService: PhotorankService(config.authToken),
-                sequenceInterval: config.sequenceInterval || 250,
+                sequenceInterval: isNaN(config.sequenceInterval) ? 250 : config.sequenceInterval,
                 itemsPerPage: config.itemsPerPage,
                 pagePersistence: config.pagePersistence,
                 numberOfPages: config.numberOfPages,
