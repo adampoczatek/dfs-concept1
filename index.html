@@ -91,6 +91,10 @@
                         <span class="user__activity">{{formatDate media.date_submitted}}</span>
                     </div>
                 </div>
+
+                <div class="media__caption">
+                    {{media.caption}}
+                </div>
             </div>
         </div>
         {{/each}}
@@ -122,7 +126,7 @@
                 base.Apps.ConceptOne({
                     target: $("#concept-one"), 
                     authToken: "f7f217fadcb8dad0bab9395c689114b74d48dbb84aa6fba32c1aa71c0a95f5e1",
-                    itemsPerPage: 8,
+                    itemsPerPage: 6,
                     pagePersistence: 4000,
                     introLength: 2000,
                     outroLength: 3000,

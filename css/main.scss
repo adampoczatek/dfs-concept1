@@ -110,6 +110,7 @@ body {
     display: block;
     float: left;
     width: 25%;
+    width: 33.333%;
     height: 50%;
     opacity: 0;
     transition: all .75s;
@@ -126,7 +127,7 @@ body {
 }
 
 .media__content {
-    max-height: 75%;
+    max-height: 55%;
     overflow: hidden;
 }
 
@@ -247,4 +248,25 @@ body {
     text-transform: uppercase;
     border-radius: 0 0 5px 5px;
     cursor: pointer;
+}
+
+.media__caption {
+    position: relative;
+    margin-top: 15px;
+    font-family: sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(0,0,0,.8);
+    padding-left: 30px;
+
+    &:before {
+        content: "“";
+        position: absolute;
+        left: 0;
+        top: -15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, .2);
+        font-style: normal;
+    }
 }
